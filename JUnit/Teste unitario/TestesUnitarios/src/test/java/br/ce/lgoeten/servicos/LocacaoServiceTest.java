@@ -1,10 +1,8 @@
 package br.ce.lgoeten.servicos;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 import java.util.Date;
 
@@ -28,9 +26,8 @@ public class LocacaoServiceTest {
 		Locacao locacao = locacaoService.alugarFilme(usuario, filme);
 
 		// verificacoes
-		assertEquals("Erro comparação valor da locacao",5.0 , locacao.getValor(), 0.1);
 		assertThat(locacao.getValor(), is(equalTo(5.0)));
-		assertTrue(DataUtils.isMesmaData(new Date(), locacao.getDataLocacao()));
-		assertTrue(DataUtils.isMesmaData(DataUtils.obterDataComDiferencaDias(1), locacao.getDataRetorno()));
+		assertThat(DataUtils.isMesmaData(new Date(), locacao.getDataLocacao()), is(true));
+		assertThat(DataUtils.isMesmaData(DataUtils.obterDataComDiferencaDias(1), locacao.getDataRetorno()), is(true));
 	}
 }
