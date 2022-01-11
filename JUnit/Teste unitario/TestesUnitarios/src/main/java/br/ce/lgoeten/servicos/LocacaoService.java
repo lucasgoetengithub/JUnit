@@ -3,6 +3,7 @@ package br.ce.lgoeten.servicos;
 import static br.ce.lgoeten.utils.DataUtils.adicionarDias;
 
 import java.util.Date;
+import java.util.List;
 
 import br.ce.lgoeten.entidades.Filme;
 import br.ce.lgoeten.entidades.Locacao;
@@ -12,24 +13,30 @@ import br.ce.lgoeten.exception.LocadoraException;
 
 public class LocacaoService {
 
-	public Locacao alugarFilme(Usuario usuario, Filme filme) throws LocadoraException, FilmeSemEstoqueException {
+	public Locacao alugarFilme(Usuario usuario, List<Filme> filmes) throws LocadoraException, FilmeSemEstoqueException {
 		if (usuario == null) {
 			throw new LocadoraException("Usuário vazio");
 		}
-		
-		if (filme== null) {
+
+		if (filmes == null || filmes.isEmpty()) {
 			throw new LocadoraException("Filme vazio");
 		}
-		
-		if (filme.getEstoque() == 0) {
-			throw new FilmeSemEstoqueException();
+
+		for (Filme filme : filmes) {
+			if (filme.getEstoque() == 0) {
+				throw new FilmeSemEstoqueException();
+			}
 		}
-		
+
 		Locacao locacao = new Locacao();
-		locacao.setFilme(filme);
+		locacao.setFilmes(filmes);
 		locacao.setUsuario(usuario);
 		locacao.setDataLocacao(new Date());
-		locacao.setValor(filme.getPrecoLocacao());
+		Double valor = 0d;
+		for (Filme filme : filmes) {
+			valor += filme.getPrecoLocacao();
+		}
+		locacao.setValor(valor);
 
 		// Entrega no dia seguinte
 		Date dataEntrega = new Date();
