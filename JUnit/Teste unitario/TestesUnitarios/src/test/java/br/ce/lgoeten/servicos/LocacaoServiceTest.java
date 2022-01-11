@@ -5,7 +5,11 @@ import static org.hamcrest.CoreMatchers.is;
 
 import java.util.Date;
 
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
@@ -20,16 +24,38 @@ import br.ce.lgoeten.utils.DataUtils;
 
 public class LocacaoServiceTest {
 
+	private LocacaoService locacaoService = new LocacaoService();
+	
 	@Rule
 	public ErrorCollector error = new ErrorCollector();
 
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
+	
+	@Before
+	public void before() {
+		locacaoService = new LocacaoService();
+	}
+	
+	@After
+	public void after() {
+		System.out.println("after");
+	}
+	
+	@BeforeClass
+	public static void beforeClass() {
+		
+	}
+	
+	@AfterClass
+	public static void afterClass() {
+		
+	}
 
 	@Test
 	public void testeLocacao() throws Exception {
 		// cenario
-		LocacaoService locacaoService = new LocacaoService();
+		
 		Usuario usuario = new Usuario("Usuario 1");
 		Filme filme = new Filme("Filme 1", 2, 5.0);
 
@@ -48,7 +74,6 @@ public class LocacaoServiceTest {
 	@Test(expected = FilmeSemEstoqueException.class)
 	public void testLocacalTestandoFilmeSemEstoque() throws Exception {
 		// cenario
-		LocacaoService locacaoService = new LocacaoService();
 		Usuario usuario = new Usuario("Usuario 1");
 		Filme filme = new Filme("Filme 1", 0, 5.0);
 
@@ -59,7 +84,6 @@ public class LocacaoServiceTest {
 	@Test
 	public void testLocacao_usuarioVazio() throws FilmeSemEstoqueException {
 		// cenario
-		LocacaoService locacaoService = new LocacaoService();
 		Filme filme = new Filme("Filme 1", 10, 5.0);
 
 		// Acao
@@ -73,7 +97,6 @@ public class LocacaoServiceTest {
 	@Test
 	public void testLocacao_filmeVazio() throws FilmeSemEstoqueException, LocadoraException {
 		// cenario
-		LocacaoService locacaoService = new LocacaoService();
 		Usuario usuario = new Usuario("Usuario 1");
 
 		// Acao,
