@@ -10,10 +10,12 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 import org.junit.rules.ExpectedException;
+import org.junit.runners.MethodSorters;
 
 import br.ce.lgoeten.entidades.Filme;
 import br.ce.lgoeten.entidades.Locacao;
@@ -22,6 +24,7 @@ import br.ce.lgoeten.exception.FilmeSemEstoqueException;
 import br.ce.lgoeten.exception.LocadoraException;
 import br.ce.lgoeten.utils.DataUtils;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LocacaoServiceTest {
 
 	private LocacaoService locacaoService = new LocacaoService();
@@ -39,7 +42,7 @@ public class LocacaoServiceTest {
 	
 	@After
 	public void after() {
-		System.out.println("after");
+		
 	}
 	
 	@BeforeClass
@@ -53,7 +56,7 @@ public class LocacaoServiceTest {
 	}
 
 	@Test
-	public void testeLocacao() throws Exception {
+	public void t1_testeLocacao() throws Exception {
 		// cenario
 		
 		Usuario usuario = new Usuario("Usuario 1");
@@ -72,7 +75,7 @@ public class LocacaoServiceTest {
 	}
 
 	@Test(expected = FilmeSemEstoqueException.class)
-	public void testLocacalTestandoFilmeSemEstoque() throws Exception {
+	public void t2_testLocacalTestandoFilmeSemEstoque() throws Exception {
 		// cenario
 		Usuario usuario = new Usuario("Usuario 1");
 		Filme filme = new Filme("Filme 1", 0, 5.0);
@@ -82,7 +85,7 @@ public class LocacaoServiceTest {
 	}
 
 	@Test
-	public void testLocacao_usuarioVazio() throws FilmeSemEstoqueException {
+	public void t3_testLocacao_usuarioVazio() throws FilmeSemEstoqueException {
 		// cenario
 		Filme filme = new Filme("Filme 1", 10, 5.0);
 
@@ -95,7 +98,7 @@ public class LocacaoServiceTest {
 	}
 
 	@Test
-	public void testLocacao_filmeVazio() throws FilmeSemEstoqueException, LocadoraException {
+	public void t4_testLocacao_filmeVazio() throws FilmeSemEstoqueException, LocadoraException {
 		// cenario
 		Usuario usuario = new Usuario("Usuario 1");
 
