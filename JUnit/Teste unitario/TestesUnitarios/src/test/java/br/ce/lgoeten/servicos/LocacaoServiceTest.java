@@ -1,8 +1,8 @@
 package br.ce.lgoeten.servicos;
 
 import static br.ce.lgoeten.matchers.MatchersProprios.caiNumaSegunda;
-import static br.ce.lgoeten.utils.DataUtils.isMesmaData;
-import static br.ce.lgoeten.utils.DataUtils.obterDataComDiferencaDias;
+import static br.ce.lgoeten.matchers.MatchersProprios.ehHoje;
+import static br.ce.lgoeten.matchers.MatchersProprios.ehHojeComDiferencaDias;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -77,8 +77,8 @@ public class LocacaoServiceTest {
 
 		// verificacao
 		error.checkThat(locacao.getValor(), is(equalTo(5.0)));
-		error.checkThat(isMesmaData(locacao.getDataLocacao(), new Date()), is(true));
-		error.checkThat(isMesmaData(locacao.getDataRetorno(), obterDataComDiferencaDias(1)), is(true));
+		error.checkThat(locacao.getDataLocacao(), ehHoje());
+		error.checkThat(locacao.getDataRetorno(), ehHojeComDiferencaDias(1));
 	}
 
 	@Test(expected = FilmeSemEstoqueException.class)
@@ -130,5 +130,6 @@ public class LocacaoServiceTest {
 
 		// verificacao
 		assertThat(retorno.getDataRetorno(), caiNumaSegunda());
+
 	}
 }
