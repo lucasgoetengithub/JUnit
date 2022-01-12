@@ -30,7 +30,6 @@ import br.ce.lgoeten.entidades.Locacao;
 import br.ce.lgoeten.entidades.Usuario;
 import br.ce.lgoeten.exception.FilmeSemEstoqueException;
 import br.ce.lgoeten.exception.LocadoraException;
-import br.ce.lgoeten.matchers.MatchersProprios;
 import br.ce.lgoeten.utils.DataUtils;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
