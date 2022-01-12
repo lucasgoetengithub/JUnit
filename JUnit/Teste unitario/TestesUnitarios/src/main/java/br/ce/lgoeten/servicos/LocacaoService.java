@@ -2,6 +2,7 @@ package br.ce.lgoeten.servicos;
 
 import static br.ce.lgoeten.utils.DataUtils.adicionarDias;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import br.ce.lgoeten.entidades.Locacao;
 import br.ce.lgoeten.entidades.Usuario;
 import br.ce.lgoeten.exception.FilmeSemEstoqueException;
 import br.ce.lgoeten.exception.LocadoraException;
+import br.ce.lgoeten.utils.DataUtils;
 
 public class LocacaoService {
 
@@ -57,6 +59,9 @@ public class LocacaoService {
 		// Entrega no dia seguinte
 		Date dataEntrega = new Date();
 		dataEntrega = adicionarDias(dataEntrega, 1);
+		if (DataUtils.verificarDiaSemana(dataEntrega, Calendar.SUNDAY)) {
+			dataEntrega = adicionarDias(dataEntrega, 1);
+		}
 		locacao.setDataRetorno(dataEntrega);
 
 		// Salvando a locacao...
