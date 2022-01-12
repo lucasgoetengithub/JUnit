@@ -1,5 +1,6 @@
 package br.ce.lgoeten.servicos;
 
+import static br.ce.lgoeten.matchers.MatchersProprios.caiNumaSegunda;
 import static br.ce.lgoeten.utils.DataUtils.isMesmaData;
 import static br.ce.lgoeten.utils.DataUtils.obterDataComDiferencaDias;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -29,6 +30,7 @@ import br.ce.lgoeten.entidades.Locacao;
 import br.ce.lgoeten.entidades.Usuario;
 import br.ce.lgoeten.exception.FilmeSemEstoqueException;
 import br.ce.lgoeten.exception.LocadoraException;
+import br.ce.lgoeten.matchers.MatchersProprios;
 import br.ce.lgoeten.utils.DataUtils;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -127,7 +129,6 @@ public class LocacaoServiceTest {
 		Locacao retorno = service.alugarFilme(usuario, filmes);
 
 		// verificacao
-		boolean ehSegunda = DataUtils.verificarDiaSemana(retorno.getDataRetorno(), Calendar.MONDAY);
-		Assert.assertTrue(ehSegunda);
+		assertThat(retorno.getDataRetorno(), caiNumaSegunda());
 	}
 }
