@@ -29,6 +29,7 @@ import br.ce.lgoeten.entidades.Usuario;
 import br.ce.lgoeten.exception.FilmeSemEstoqueException;
 import br.ce.lgoeten.exception.LocadoraException;
 import br.ce.lgoeten.utils.DataUtils;
+import buildermaster.BuilderMaster;
 
 public class LocacaoServiceTest {
 
@@ -112,5 +113,9 @@ public class LocacaoServiceTest {
 		// verificacao
 		assertThat(retorno.getDataRetorno(), caiNumaSegunda());
 
+	}
+	
+	public static void main(String[] args) {
+		new BuilderMaster().gerarCodigoClasse(Locacao.class);
 	}
 }
